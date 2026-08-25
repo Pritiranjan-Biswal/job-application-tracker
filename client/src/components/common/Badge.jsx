@@ -1,48 +1,107 @@
 import React from 'react';
 
 const statusStyles = {
-  // Application statuses
-  Applied: 'bg-blue-50 text-blue-700 border-blue-200 dot-blue-500',
-  'Online Assessment': 'bg-purple-50 text-purple-700 border-purple-200 dot-purple-500',
-  'OA Cleared': 'bg-cyan-50 text-cyan-700 border-cyan-200 dot-cyan-500',
-  Interview: 'bg-amber-50 text-amber-700 border-amber-200 dot-amber-500',
-  Selected: 'bg-emerald-50 text-emerald-700 border-emerald-200 dot-emerald-500',
-  Rejected: 'bg-rose-50 text-rose-700 border-rose-200 dot-rose-500',
-  Withdrawn: 'bg-slate-100 text-slate-700 border-slate-200 dot-slate-400',
+  // Application stages
+  Applied: {
+    bg: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
+    dot: 'bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]',
+  },
+  'Online Assessment': {
+    bg: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
+    dot: 'bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)]',
+  },
+  'OA Cleared': {
+    bg: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30',
+    dot: 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]',
+  },
+  Interview: {
+    bg: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+    dot: 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]',
+  },
+  Selected: {
+    bg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+    dot: 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]',
+  },
+  Rejected: {
+    bg: 'bg-rose-500/10 text-rose-400 border-rose-500/30',
+    dot: 'bg-rose-400 shadow-[0_0_8px_rgba(251,113,133,0.8)]',
+  },
+  Withdrawn: {
+    bg: 'bg-slate-500/10 text-slate-400 border-slate-500/30',
+    dot: 'bg-slate-400',
+  },
 
-  // Interview statuses
-  Scheduled: 'bg-indigo-50 text-indigo-700 border-indigo-200 dot-indigo-500',
-  Completed: 'bg-emerald-50 text-emerald-700 border-emerald-200 dot-emerald-500',
-  Rescheduled: 'bg-amber-50 text-amber-700 border-amber-200 dot-amber-500',
-  Cancelled: 'bg-rose-50 text-rose-700 border-rose-200 dot-rose-500',
+  // Interview rounds
+  Scheduled: {
+    bg: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30',
+    dot: 'bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.8)]',
+  },
+  Completed: {
+    bg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+    dot: 'bg-emerald-400',
+  },
+  Rescheduled: {
+    bg: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+    dot: 'bg-amber-400',
+  },
+  Cancelled: {
+    bg: 'bg-rose-500/10 text-rose-400 border-rose-500/30',
+    dot: 'bg-rose-400',
+  },
 
   // Priority
-  High: 'bg-red-50 text-red-700 border-red-200 dot-red-500',
-  Medium: 'bg-amber-50 text-amber-700 border-amber-200 dot-amber-500',
-  Low: 'bg-slate-100 text-slate-700 border-slate-200 dot-slate-400',
+  High: {
+    bg: 'bg-red-500/10 text-red-400 border-red-500/30',
+    dot: 'bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.8)]',
+  },
+  Medium: {
+    bg: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+    dot: 'bg-amber-400',
+  },
+  Low: {
+    bg: 'bg-slate-500/10 text-slate-400 border-slate-500/30',
+    dot: 'bg-slate-400',
+  },
 
-  // User / Admin statuses
-  Active: 'bg-emerald-50 text-emerald-700 border-emerald-200 dot-emerald-500',
-  Blocked: 'bg-rose-50 text-rose-700 border-rose-200 dot-rose-500',
-  Admin: 'bg-violet-50 text-violet-700 border-violet-200 dot-violet-500',
-  User: 'bg-slate-100 text-slate-700 border-slate-200 dot-slate-400',
+  // Users
+  Active: {
+    bg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+    dot: 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]',
+  },
+  Blocked: {
+    bg: 'bg-rose-500/10 text-rose-400 border-rose-500/30',
+    dot: 'bg-rose-400 shadow-[0_0_8px_rgba(251,113,133,0.8)]',
+  },
+  Admin: {
+    bg: 'bg-purple-500/10 text-purple-300 border-purple-500/30',
+    dot: 'bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)]',
+  },
+  User: {
+    bg: 'bg-slate-500/10 text-slate-300 border-slate-500/30',
+    dot: 'bg-slate-400',
+  },
 };
 
 export const Badge = ({ status, text, size = 'sm', showDot = true }) => {
   const label = text || status || 'Unknown';
-  const style = statusStyles[status] || 'bg-slate-100 text-slate-700 border-slate-200 dot-slate-400';
+  const style = statusStyles[status] || {
+    bg: 'bg-slate-500/10 text-slate-400 border-slate-500/30',
+    dot: 'bg-slate-400',
+  };
 
-  const dotColorClass = style.split(' ').find((c) => c.startsWith('dot-'))?.replace('dot-', 'bg-') || 'bg-slate-400';
-  const badgeClasses = style.split(' ').filter((c) => !c.startsWith('dot-')).join(' ');
-
-  const sizeClass = size === 'xs' ? 'px-2 py-0.5 text-xs' : 'px-2.5 py-1 text-xs font-medium';
+  const sizeClass =
+    size === 'xs'
+      ? 'px-2 py-0.5 text-[11px]'
+      : size === 'md'
+      ? 'px-3.5 py-1.5 text-xs font-semibold'
+      : 'px-2.5 py-1 text-xs font-medium';
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border font-medium transition-colors ${badgeClasses} ${sizeClass}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border backdrop-blur-md transition-all font-mono tracking-tight ${style.bg} ${sizeClass}`}
     >
-      {showDot && <span className={`w-1.5 h-1.5 rounded-full ${dotColorClass}`} />}
-      {label}
+      {showDot && <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${style.dot}`} />}
+      <span className="font-sans font-medium tracking-normal">{label}</span>
     </span>
   );
 };

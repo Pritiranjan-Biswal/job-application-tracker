@@ -3,7 +3,7 @@ import Modal from '../common/Modal';
 import { Loader2 } from 'lucide-react';
 
 const ROUND_OPTIONS = [
-  'Recruiter Screening',
+  'Recruiter Screening Call',
   'Technical Round 1 (DSA / Coding)',
   'Technical Round 2 (Core CS / System Design)',
   'Machine Coding Round',
@@ -108,8 +108,8 @@ export const InterviewModal = ({
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Round Name */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">
-            Interview Round <span className="text-rose-500">*</span>
+          <label className="block text-xs font-semibold text-slate-300 mb-1">
+            Interview Round <span className="text-rose-400">*</span>
           </label>
           <input
             list="rounds-list"
@@ -118,7 +118,7 @@ export const InterviewModal = ({
             value={formData.round}
             onChange={handleChange}
             placeholder="Select or type round name..."
-            className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none"
+            className="w-full px-3.5 py-2.5 text-sm glass-input rounded-xl outline-none"
           />
           <datalist id="rounds-list">
             {ROUND_OPTIONS.map((r) => (
@@ -130,23 +130,25 @@ export const InterviewModal = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Interview Type */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Platform / Medium</label>
+            <label className="block text-xs font-semibold text-slate-300 mb-1">Platform / Medium</label>
             <select
               name="interviewType"
               value={formData.interviewType}
               onChange={handleChange}
-              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none"
+              className="w-full px-3.5 py-2.5 text-sm glass-input rounded-xl outline-none"
             >
               {TYPE_OPTIONS.map((t) => (
-                <option key={t} value={t}>{t}</option>
+                <option key={t} value={t} className="bg-slate-900 text-white">
+                  {t}
+                </option>
               ))}
             </select>
           </div>
 
           {/* Date and Time */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
-              Date & Time <span className="text-rose-500">*</span>
+            <label className="block text-xs font-semibold text-slate-300 mb-1">
+              Date & Time <span className="text-rose-400">*</span>
             </label>
             <input
               type="datetime-local"
@@ -154,36 +156,38 @@ export const InterviewModal = ({
               required
               value={formData.interviewDate}
               onChange={handleChange}
-              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none"
+              className="w-full px-3.5 py-2.5 text-sm glass-input rounded-xl outline-none"
             />
           </div>
         </div>
 
         {/* Meeting Link */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">Meeting Link</label>
+          <label className="block text-xs font-semibold text-slate-300 mb-1">Meeting Link</label>
           <input
             type="url"
             name="meetingLink"
             value={formData.meetingLink}
             onChange={handleChange}
             placeholder="https://meet.google.com/... or https://zoom.us/..."
-            className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none"
+            className="w-full px-3.5 py-2.5 text-sm glass-input rounded-xl outline-none"
           />
         </div>
 
         {/* Status (if editing) */}
         {initialData && (
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Round Status</label>
+            <label className="block text-xs font-semibold text-slate-300 mb-1">Round Status</label>
             <select
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none"
+              className="w-full px-3.5 py-2.5 text-sm glass-input rounded-xl outline-none"
             >
               {STATUS_OPTIONS.map((s) => (
-                <option key={s} value={s}>{s}</option>
+                <option key={s} value={s} className="bg-slate-900 text-white">
+                  {s}
+                </option>
               ))}
             </select>
           </div>
@@ -191,47 +195,47 @@ export const InterviewModal = ({
 
         {/* Preparation Notes */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">Preparation Notes / Focus Areas</label>
+          <label className="block text-xs font-semibold text-slate-300 mb-1">Preparation Notes / Focus Areas</label>
           <textarea
             name="notes"
             rows={2}
             value={formData.notes}
             onChange={handleChange}
             placeholder="e.g. Focus on Dynamic Programming, Graph Algorithms, and React hooks optimizations."
-            className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none resize-none"
+            className="w-full px-3.5 py-2.5 text-sm glass-input rounded-xl outline-none resize-none"
           />
         </div>
 
-        {/* Feedback / Post-Interview Thoughts (if editing) */}
+        {/* Feedback (if editing) */}
         {initialData && (
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Post-Interview Feedback / Notes</label>
+            <label className="block text-xs font-semibold text-slate-300 mb-1">Post-Interview Feedback / Notes</label>
             <textarea
               name="feedback"
               rows={2}
               value={formData.feedback}
               onChange={handleChange}
-              placeholder="e.g. Solved both coding questions; interviewer appreciated clean modular code."
-              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none resize-none"
+              placeholder="e.g. Solved both coding questions; positive interviewer response."
+              className="w-full px-3.5 py-2.5 text-sm glass-input rounded-xl outline-none resize-none"
             />
           </div>
         )}
 
         {/* Submit Buttons */}
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-xl transition-colors"
+            className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white rounded-xl transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-sm transition-all disabled:opacity-60"
+            className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-xl shadow-lg shadow-indigo-600/25 transition-all disabled:opacity-60"
           >
-            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+            {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
             {initialData ? 'Update Interview' : 'Schedule Round'}
           </button>
         </div>

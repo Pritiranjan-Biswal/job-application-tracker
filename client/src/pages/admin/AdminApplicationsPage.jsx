@@ -12,6 +12,7 @@ import {
   MapPin,
   Calendar,
   DollarSign,
+  Sparkles,
 } from 'lucide-react';
 
 const STATUS_LIST = [
@@ -77,14 +78,14 @@ export const AdminApplicationsPage = () => {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Platform Applications Audit</h1>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Platform Applications Audit</h1>
+        <p className="text-xs sm:text-sm text-slate-400 mt-1">
           Cross-user oversight of all job applications logged across the platform
         </p>
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-white p-4 sm:p-5 rounded-3xl border border-slate-200/80 shadow-xs flex flex-col md:flex-row items-center gap-3">
+      <div className="glass-card p-4 sm:p-5 rounded-3xl border border-slate-800 shadow-xl flex flex-col md:flex-row items-center gap-3">
         <div className="relative flex-1 w-full">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -92,14 +93,14 @@ export const AdminApplicationsPage = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search across all companies and job titles..."
-            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-600"
+            className="w-full pl-10 pr-4 py-2.5 glass-input rounded-xl text-sm outline-none"
           />
         </div>
 
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 outline-none w-full md:w-auto"
+          className="px-3.5 py-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-xs font-semibold text-slate-300 outline-none w-full md:w-auto"
         >
           <option value="all">All Application Statuses</option>
           {STATUS_LIST.map((s) => (
@@ -110,51 +111,49 @@ export const AdminApplicationsPage = () => {
 
       {/* Applications Audit Table */}
       {loading ? (
-        <div className="py-20 flex justify-center">
+        <div className="py-24 flex justify-center">
           <Loader size="lg" text="Auditing platform applications..." />
         </div>
       ) : applications.length > 0 ? (
-        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div className="glass-card rounded-3xl border border-slate-800 shadow-xl overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-600">
-              <thead className="bg-slate-50 text-xs uppercase font-semibold text-slate-500 border-b border-slate-100">
+            <table className="w-full text-left text-sm text-slate-300">
+              <thead className="bg-[#0f172a]/70 text-[11px] uppercase font-mono font-bold text-slate-400 border-b border-slate-800">
                 <tr>
-                  <th className="py-3.5 px-6">Applicant</th>
-                  <th className="py-3.5 px-6">Company & Role</th>
-                  <th className="py-3.5 px-6">Status</th>
-                  <th className="py-3.5 px-6">Applied Date</th>
-                  <th className="py-3.5 px-6">Source</th>
+                  <th className="py-4 px-6">Applicant</th>
+                  <th className="py-4 px-6">Company & Position</th>
+                  <th className="py-4 px-6">Stage</th>
+                  <th className="py-4 px-6">Applied Date</th>
+                  <th className="py-4 px-6">Channel</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-800/60">
                 {applications.map((app) => (
-                  <tr key={app._id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-4 px-6 font-medium text-slate-900">
+                  <tr key={app._id} className="hover:bg-slate-800/40 transition-colors">
+                    <td className="py-4 px-6 font-medium text-white">
                       <div className="flex items-center gap-3">
                         <img
                           src={app.userId?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
                           alt={app.userId?.name || 'User'}
-                          className="w-8 h-8 rounded-lg object-cover border border-slate-200"
+                          className="w-9 h-9 rounded-xl object-cover border border-slate-700"
                         />
                         <div>
-                          <p className="font-bold text-xs text-slate-900">{app.userId?.name || 'Deleted User'}</p>
-                          <p className="text-[11px] text-slate-400">{app.userId?.email || '-'}</p>
+                          <p className="font-bold text-sm text-white">{app.userId?.name || 'Deleted User'}</p>
+                          <p className="text-xs text-slate-400 font-mono">{app.userId?.email || '-'}</p>
                         </div>
                       </div>
                     </td>
 
-                    <td className="py-4 px-6 font-semibold text-slate-900">
-                      <div>
-                        <span className="text-slate-900 font-bold">{app.companyName}</span>
-                        <span className="block text-xs font-normal text-slate-500">{app.jobTitle}</span>
-                      </div>
+                    <td className="py-4 px-6">
+                      <span className="font-bold text-white block">{app.companyName}</span>
+                      <span className="text-xs text-slate-400 font-normal">{app.jobTitle}</span>
                     </td>
 
                     <td className="py-4 px-6">
                       <Badge status={app.status} />
                     </td>
 
-                    <td className="py-4 px-6 text-xs text-slate-500">
+                    <td className="py-4 px-6 text-xs text-slate-400 font-mono">
                       {new Date(app.appliedDate).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
@@ -162,8 +161,8 @@ export const AdminApplicationsPage = () => {
                       })}
                     </td>
 
-                    <td className="py-4 px-6 text-xs text-slate-500">
-                      <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md font-medium">
+                    <td className="py-4 px-6 text-xs text-slate-400">
+                      <span className="px-2.5 py-1 bg-slate-800 border border-slate-700 text-slate-300 rounded-lg font-mono">
                         {app.source}
                       </span>
                     </td>
@@ -173,7 +172,7 @@ export const AdminApplicationsPage = () => {
             </table>
           </div>
 
-          <div className="p-4 border-t border-slate-100">
+          <div className="p-4 border-t border-slate-800">
             <Pagination
               currentPage={pagination.currentPage}
               totalPages={pagination.totalPages}

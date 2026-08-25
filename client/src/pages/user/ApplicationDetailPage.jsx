@@ -142,17 +142,17 @@ export const ApplicationDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="py-20 flex justify-center">
-        <Loader size="lg" text="Loading application journey..." />
+      <div className="py-24 flex justify-center">
+        <Loader size="lg" text="Loading stage journey..." />
       </div>
     );
   }
 
   if (!application) {
     return (
-      <div className="text-center py-20">
-        <h2 className="text-xl font-bold text-slate-800">Application not found</h2>
-        <Link to="/applications" className="text-indigo-600 text-sm mt-2 inline-block">
+      <div className="text-center py-24">
+        <h2 className="text-xl font-bold text-white">Application not found</h2>
+        <Link to="/applications" className="text-indigo-400 text-xs font-bold mt-2 inline-block">
           &larr; Return to Applications
         </Link>
       </div>
@@ -167,30 +167,30 @@ export const ApplicationDetailPage = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <Link
           to="/applications"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Applications
+          Back to Applications Pipeline
         </Link>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsInterviewModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-xl transition-colors border border-indigo-200"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/20 rounded-xl transition-all border border-indigo-500/30"
           >
-            <CalendarPlus className="w-3.5 h-3.5" />
+            <CalendarPlus className="w-3.5 h-3.5 text-indigo-400" />
             Schedule Interview
           </button>
           <button
             onClick={() => setIsEditModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white rounded-xl transition-colors"
           >
             <Edit2 className="w-3.5 h-3.5" />
             Edit
           </button>
           <button
             onClick={() => setIsDeleteModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/30 rounded-xl transition-colors"
           >
             <Trash2 className="w-3.5 h-3.5" />
             Delete
@@ -198,28 +198,28 @@ export const ApplicationDetailPage = () => {
         </div>
       </div>
 
-      {/* Main Info Card */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
+      {/* Main Hero Card */}
+      <div className="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800/80 shadow-2xl">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-800">
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
                 {application.companyName}
               </h1>
               <Badge status={application.status} size="md" />
             </div>
-            <p className="text-base sm:text-lg font-medium text-slate-700 mt-1">
+            <p className="text-sm sm:text-base font-semibold text-slate-300 mt-1">
               {application.jobTitle}
             </p>
           </div>
 
-          {/* Quick Stage Advance Selector */}
-          <div className="flex items-center gap-2 bg-slate-50 p-2 rounded-2xl border border-slate-200">
-            <span className="text-xs font-semibold text-slate-500 pl-2">Current Stage:</span>
+          {/* Quick Stage Dropdown */}
+          <div className="flex items-center gap-2 bg-slate-900/90 p-2 rounded-2xl border border-slate-800">
+            <span className="text-xs font-mono font-bold text-slate-400 pl-2">STAGE:</span>
             <select
               value={application.status}
               onChange={(e) => handleStageChange(e.target.value)}
-              className="px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 cursor-pointer shadow-2xs"
+              className="px-3 py-1.5 bg-slate-950 border border-slate-700 rounded-xl text-xs font-bold text-indigo-300 focus:outline-none focus:border-indigo-500 cursor-pointer"
             >
               <option value="Applied">Applied</option>
               <option value="Online Assessment">Online Assessment</option>
@@ -232,17 +232,17 @@ export const ApplicationDetailPage = () => {
           </div>
         </div>
 
-        {/* Stage Progress Stepper (for normal progressive pipeline) */}
+        {/* Stage Progress Stepper */}
         {!['Rejected', 'Withdrawn'].includes(application.status) && (
-          <div className="py-6 border-b border-slate-100 overflow-x-auto">
-            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-4">
-              Hiring Pipeline Progress
+          <div className="py-6 border-b border-slate-800 overflow-x-auto">
+            <p className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest mb-4">
+              Hiring Pipeline Stage Progress
             </p>
             <div className="flex items-center justify-between min-w-[550px] relative">
               {/* Progress Line */}
-              <div className="absolute top-1/2 left-4 right-4 -translate-y-1/2 h-1 bg-slate-100 -z-0">
+              <div className="absolute top-1/2 left-4 right-4 -translate-y-1/2 h-1 bg-slate-800 -z-0">
                 <div
-                  className="h-full bg-indigo-600 transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-500 transition-all duration-700 shadow-[0_0_12px_rgba(99,102,241,0.5)]"
                   style={{
                     width: `${Math.max(0, (currentStageIndex / (STAGES.length - 1)) * 100)}%`,
                   }}
@@ -257,17 +257,17 @@ export const ApplicationDetailPage = () => {
                   <div key={stage} className="flex flex-col items-center relative z-10">
                     <button
                       onClick={() => handleStageChange(stage)}
-                      className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
+                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
                         isCompleted
-                          ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                          : 'bg-white border-2 border-slate-200 text-slate-400 hover:border-indigo-300'
-                      } ${isCurrent ? 'ring-4 ring-indigo-100 scale-110' : ''}`}
+                          ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
+                          : 'bg-slate-900 border-2 border-slate-700 text-slate-500 hover:border-indigo-500/50'
+                      } ${isCurrent ? 'ring-4 ring-indigo-500/30 scale-110' : ''}`}
                     >
                       {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : idx + 1}
                     </button>
                     <span
-                      className={`text-xs mt-2 font-medium ${
-                        isCurrent ? 'text-indigo-600 font-bold' : isCompleted ? 'text-slate-800' : 'text-slate-400'
+                      className={`text-xs mt-2 font-mono ${
+                        isCurrent ? 'text-indigo-400 font-bold' : isCompleted ? 'text-slate-200' : 'text-slate-500'
                       }`}
                     >
                       {stage}
@@ -280,32 +280,32 @@ export const ApplicationDetailPage = () => {
         )}
 
         {/* Metadata Details Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 text-sm">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 text-xs">
           <div>
-            <span className="block text-xs font-semibold text-slate-400">Location</span>
-            <div className="flex items-center gap-1.5 font-medium text-slate-800 mt-1">
-              <MapPin className="w-4 h-4 text-slate-400" />
+            <span className="block font-mono font-bold text-slate-500 uppercase text-[10px]">Location</span>
+            <div className="flex items-center gap-1.5 font-bold text-slate-200 mt-1">
+              <MapPin className="w-4 h-4 text-indigo-400" />
               <span>{application.location || 'Remote'}</span>
             </div>
           </div>
 
           <div>
-            <span className="block text-xs font-semibold text-slate-400">Job Type</span>
-            <span className="block font-medium text-slate-800 mt-1">{application.jobType}</span>
+            <span className="block font-mono font-bold text-slate-500 uppercase text-[10px]">Job Type</span>
+            <span className="block font-bold text-slate-200 mt-1">{application.jobType}</span>
           </div>
 
           <div>
-            <span className="block text-xs font-semibold text-slate-400">Salary / Compensation</span>
-            <div className="flex items-center gap-1.5 font-bold text-slate-800 mt-1">
-              <DollarSign className="w-4 h-4 text-slate-400" />
+            <span className="block font-mono font-bold text-slate-500 uppercase text-[10px]">Salary / CTC</span>
+            <div className="flex items-center gap-1.5 font-bold text-emerald-400 mt-1 font-mono">
+              <DollarSign className="w-4 h-4 text-emerald-400" />
               <span>{application.salary || 'Not Disclosed'}</span>
             </div>
           </div>
 
           <div>
-            <span className="block text-xs font-semibold text-slate-400">Applied Date</span>
-            <div className="flex items-center gap-1.5 font-medium text-slate-800 mt-1">
-              <Calendar className="w-4 h-4 text-slate-400" />
+            <span className="block font-mono font-bold text-slate-500 uppercase text-[10px]">Applied Date</span>
+            <div className="flex items-center gap-1.5 font-semibold text-slate-300 mt-1 font-mono">
+              <Calendar className="w-4 h-4 text-indigo-400" />
               <span>
                 {new Date(application.appliedDate).toLocaleDateString('en-US', {
                   month: 'short',
@@ -317,21 +317,21 @@ export const ApplicationDetailPage = () => {
           </div>
 
           <div>
-            <span className="block text-xs font-semibold text-slate-400">Source</span>
-            <span className="inline-block mt-1 font-medium text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-md text-xs">
+            <span className="block font-mono font-bold text-slate-500 uppercase text-[10px]">Channel Source</span>
+            <span className="inline-block mt-1 font-mono font-semibold text-indigo-300 bg-slate-900 border border-slate-800 px-2.5 py-0.5 rounded-lg text-xs">
               {application.source}
             </span>
           </div>
 
           <div>
-            <span className="block text-xs font-semibold text-slate-400">Priority</span>
-            <span className="block font-semibold text-slate-800 mt-1">{application.priority}</span>
+            <span className="block font-mono font-bold text-slate-500 uppercase text-[10px]">Priority</span>
+            <span className="block font-bold text-slate-200 mt-1">{application.priority}</span>
           </div>
 
           {application.followUpDate && (
             <div>
-              <span className="block text-xs font-semibold text-slate-400">Follow-Up Date</span>
-              <span className="block font-semibold text-amber-600 mt-1">
+              <span className="block font-mono font-bold text-slate-500 uppercase text-[10px]">Follow-Up Due</span>
+              <span className="block font-mono font-bold text-amber-400 mt-1">
                 {new Date(application.followUpDate).toLocaleDateString('en-US', {
                   month: 'short',
                   day: 'numeric',
@@ -343,37 +343,37 @@ export const ApplicationDetailPage = () => {
 
           {application.jobUrl && (
             <div>
-              <span className="block text-xs font-semibold text-slate-400">Job Link</span>
+              <span className="block font-mono font-bold text-slate-500 uppercase text-[10px]">External URL</span>
               <a
                 href={application.jobUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-indigo-600 font-semibold mt-1 hover:underline text-xs"
+                className="inline-flex items-center gap-1 text-indigo-400 font-bold mt-1 hover:underline text-xs"
               >
-                External Posting
+                View Job Posting
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
           )}
         </div>
 
-        {/* Attached Resume */}
+        {/* Attached Resume Bar */}
         {application.resumeUrl && (
-          <div className="mt-6 p-4 rounded-2xl bg-indigo-50/50 border border-indigo-100 flex items-center justify-between">
+          <div className="mt-6 p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <FileText className="w-5 h-5 text-indigo-600" />
+              <FileText className="w-5 h-5 text-indigo-400" />
               <div>
-                <p className="text-xs font-bold text-indigo-950">Resume Attached for this Role</p>
-                <p className="text-[11px] text-slate-500">Stored securely on Cloudinary</p>
+                <p className="text-xs font-bold text-white">Resume Attached for this Role</p>
+                <p className="text-[11px] text-slate-400">Stored on Cloudinary CDN</p>
               </div>
             </div>
             <a
               href={application.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 shadow-xs"
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-600/30 transition-all"
             >
-              View Resume
+              Download PDF
             </a>
           </div>
         )}
@@ -383,28 +383,28 @@ export const ApplicationDetailPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Timeline Journey (2 Columns) */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
+          <div className="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800/80 shadow-xl">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">Application Timeline & Journey</h2>
-                <p className="text-xs text-slate-500 mt-0.5">Chronological record of updates, stages, and milestones</p>
+                <h2 className="text-lg font-bold text-white">Application Journey Timeline</h2>
+                <p className="text-xs text-slate-400 mt-0.5">Chronological record of status transitions and notes</p>
               </div>
-              <span className="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg">
-                {timeline.length} Events
+              <span className="text-xs font-mono font-bold px-3 py-1 bg-slate-800 text-slate-300 rounded-xl">
+                {timeline.length} Milestones
               </span>
             </div>
 
             {/* Timeline Vertical Feed */}
             {timeline.length > 0 ? (
-              <div className="relative pl-6 border-l-2 border-indigo-100 space-y-6 my-4">
+              <div className="relative pl-6 border-l-2 border-indigo-500/30 space-y-6 my-4">
                 {timeline.map((event, idx) => (
                   <div key={event._id || idx} className="relative group">
                     {/* Dot on line */}
-                    <div className="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-indigo-600 ring-4 ring-white" />
-                    
-                    <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <div className="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-indigo-500 ring-4 ring-[#090d16] shadow-[0_0_10px_rgba(99,102,241,0.8)]" />
+
+                    <div className="bg-slate-900/90 p-4 rounded-2xl border border-slate-800">
                       <div className="flex items-center justify-between gap-2 mb-1">
-                        <span className="text-xs font-bold text-slate-900">{event.status}</span>
+                        <span className="text-xs font-bold text-white">{event.status}</span>
                         <span className="text-[11px] text-slate-400 font-mono">
                           {new Date(event.date).toLocaleDateString('en-US', {
                             month: 'short',
@@ -413,53 +413,53 @@ export const ApplicationDetailPage = () => {
                           })}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-600 leading-relaxed">{event.description}</p>
+                      <p className="text-xs text-slate-300 leading-relaxed">{event.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-slate-400 py-4">No timeline entries recorded yet.</p>
+              <p className="text-xs text-slate-500 py-4">No timeline entries recorded yet.</p>
             )}
 
             {/* Add Timeline Note Form */}
-            <form onSubmit={handleAddTimelineNote} className="mt-6 pt-6 border-t border-slate-100 flex gap-2">
+            <form onSubmit={handleAddTimelineNote} className="mt-6 pt-6 border-t border-slate-800 flex gap-2">
               <input
                 type="text"
                 value={newNote}
                 onChange={(e) => setNewNote(e.target.value)}
-                placeholder="Log a custom milestone or interview note..."
-                className="flex-1 px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none"
+                placeholder="Log a custom milestone or assessment score..."
+                className="flex-1 px-3.5 py-2.5 text-xs glass-input rounded-xl outline-none"
               />
               <button
                 type="submit"
                 disabled={addingNote || !newNote.trim()}
-                className="px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl transition-all disabled:opacity-50"
+                className="px-5 py-2.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition-all disabled:opacity-50"
               >
-                {addingNote ? 'Adding...' : 'Add Note'}
+                {addingNote ? 'Saving...' : 'Add Note'}
               </button>
             </form>
           </div>
 
           {/* Notes Section */}
           {application.notes && (
-            <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs">
-              <h3 className="text-sm font-bold text-slate-900 mb-2">Preparation & Referral Notes</h3>
-              <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-wrap bg-slate-50 p-4 rounded-2xl border border-slate-100">
+            <div className="glass-card rounded-3xl p-6 border border-slate-800 shadow-xl">
+              <h3 className="text-sm font-bold text-white mb-2">Preparation Notes & Context</h3>
+              <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-wrap bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
                 {application.notes}
               </p>
             </div>
           )}
         </div>
 
-        {/* Scheduled Interviews Sidebar Widget (1 Column) */}
+        {/* Scheduled Interviews Sidebar Widget */}
         <div className="space-y-6">
-          <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs">
+          <div className="glass-card rounded-3xl p-6 border border-slate-800 shadow-xl">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base font-bold text-slate-900">Interviews</h2>
+              <h2 className="text-base font-bold text-white">Interviews</h2>
               <button
                 onClick={() => setIsInterviewModalOpen(true)}
-                className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 inline-flex items-center gap-1"
+                className="text-xs font-bold text-indigo-400 hover:text-indigo-300 inline-flex items-center gap-1"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Schedule
@@ -471,16 +471,16 @@ export const ApplicationDetailPage = () => {
                 {interviews.map((interview) => (
                   <div
                     key={interview._id}
-                    className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2"
+                    className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-2.5"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <h4 className="text-xs font-bold text-slate-900">{interview.round}</h4>
+                      <h4 className="text-xs font-bold text-white">{interview.round}</h4>
                       <Badge status={interview.status} size="xs" />
                     </div>
 
-                    <div className="text-xs text-slate-500 space-y-1">
+                    <div className="text-xs text-slate-400 space-y-1 font-mono">
                       <div className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-slate-400" />
+                        <Clock className="w-3.5 h-3.5 text-indigo-400" />
                         <span>
                           {new Date(interview.interviewDate).toLocaleString('en-US', {
                             weekday: 'short',
@@ -492,13 +492,13 @@ export const ApplicationDetailPage = () => {
                         </span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Video className="w-3.5 h-3.5 text-slate-400" />
+                        <Video className="w-3.5 h-3.5 text-purple-400" />
                         <span>{interview.interviewType}</span>
                       </div>
                     </div>
 
                     {interview.notes && (
-                      <p className="text-[11px] text-slate-500 italic bg-white p-2 rounded-lg border border-slate-100">
+                      <p className="text-[11px] text-slate-400 italic bg-slate-950 p-2.5 rounded-xl border border-slate-800">
                         "{interview.notes}"
                       </p>
                     )}
@@ -509,7 +509,7 @@ export const ApplicationDetailPage = () => {
                           href={interview.meetingLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full inline-flex items-center justify-center gap-1.5 py-1.5 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold transition-colors"
+                          className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-600/30 transition-all"
                         >
                           <Video className="w-3.5 h-3.5" />
                           Launch Meeting
@@ -520,7 +520,7 @@ export const ApplicationDetailPage = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 text-xs text-slate-400">
+              <div className="text-center py-8 text-xs text-slate-500">
                 No interviews scheduled for this role yet.
               </div>
             )}
@@ -557,13 +557,13 @@ export const ApplicationDetailPage = () => {
         jobTitle={application.jobTitle}
       />
 
-      {/* Delete Modal */}
+      {/* Delete Confirmation Modal */}
       <ConfirmDialog
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDelete}
         title="Delete Job Application"
-        message="Are you sure you want to permanently delete this application and all associated stage timeline history? This action cannot be undone."
+        message="Are you sure you want to permanently delete this application and all stage timeline events? This action cannot be reversed."
       />
     </div>
   );

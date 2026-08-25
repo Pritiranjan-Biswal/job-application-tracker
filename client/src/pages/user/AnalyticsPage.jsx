@@ -27,16 +27,14 @@ import {
 } from 'recharts';
 
 const STATUS_COLORS = {
-  Applied: '#3b82f6',
-  'Online Assessment': '#a855f7',
-  'OA Cleared': '#06b6d4',
-  Interview: '#f59e0b',
-  Selected: '#10b981',
-  Rejected: '#f43f5e',
-  Withdrawn: '#64748b',
+  Applied: '#60a5fa',
+  'Online Assessment': '#c084fc',
+  'OA Cleared': '#22d3ee',
+  Interview: '#fbbf24',
+  Selected: '#34d399',
+  Rejected: '#fb7185',
+  Withdrawn: '#94a3b8',
 };
-
-const SOURCE_COLORS = ['#6366f1', '#ec4899', '#8b5cf6', '#14b8a6', '#f59e0b', '#3b82f6'];
 
 export const AnalyticsPage = () => {
   const [stats, setStats] = useState(null);
@@ -62,22 +60,11 @@ export const AnalyticsPage = () => {
 
   if (loading) {
     return (
-      <div className="py-20 flex justify-center">
-        <Loader size="lg" text="Aggregating hiring pipeline data..." />
+      <div className="py-24 flex justify-center">
+        <Loader size="lg" text="Aggregating pipeline metrics..." />
       </div>
     );
   }
-
-  // Format Status Donut Data
-  const pieData = stats?.statusCounts
-    ? Object.entries(stats.statusCounts)
-        .filter(([_, count]) => count > 0)
-        .map(([status, count]) => ({
-          name: status,
-          value: count,
-          color: STATUS_COLORS[status] || '#6366f1',
-        }))
-    : [];
 
   const total = stats?.totalApplications || 0;
   const oaCleared =
@@ -92,44 +79,46 @@ export const AnalyticsPage = () => {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Hiring Analytics & Insights</h1>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Detailed metrics, conversion funnel, and performance patterns computed directly with MongoDB aggregations
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          Hiring Funnel & Deep Analytics
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          Real-time metrics computed directly by MongoDB Aggregation Pipelines
         </p>
       </div>
 
       {/* Top Conversion Funnel Cards */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
-        <h2 className="text-base font-bold text-slate-900 mb-2">Hiring Conversion Funnel</h2>
-        <p className="text-xs text-slate-500 mb-6">Stage-by-stage progression from submission to final job offer</p>
+      <div className="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800/80 shadow-2xl">
+        <h2 className="text-base font-bold text-white mb-1">Career Conversion Funnel</h2>
+        <p className="text-xs text-slate-400 mb-6 font-mono">Stage-by-stage conversion velocity</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-          <div className="p-4 rounded-2xl bg-blue-50 border border-blue-100">
-            <span className="text-xs font-bold text-blue-900 uppercase">1. Total Applied</span>
-            <p className="text-3xl font-extrabold text-blue-950 mt-2">{total}</p>
-            <p className="text-xs text-blue-700 mt-1">100% of pipeline</p>
+          <div className="p-5 rounded-2xl bg-blue-500/10 border border-blue-500/20">
+            <span className="text-xs font-mono font-bold text-blue-400 uppercase">1. Total Logged</span>
+            <p className="text-3xl font-extrabold text-white mt-2">{total}</p>
+            <p className="text-xs text-blue-300 mt-1 font-mono">100% of pipeline</p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-cyan-50 border border-cyan-100">
-            <span className="text-xs font-bold text-cyan-900 uppercase">2. OA Cleared</span>
-            <p className="text-3xl font-extrabold text-cyan-950 mt-2">{oaCleared}</p>
-            <p className="text-xs text-cyan-700 mt-1">
-              {total > 0 ? ((oaCleared / total) * 100).toFixed(1) : 0}% of applied
+          <div className="p-5 rounded-2xl bg-cyan-500/10 border border-cyan-500/20">
+            <span className="text-xs font-mono font-bold text-cyan-400 uppercase">2. OA Cleared</span>
+            <p className="text-3xl font-extrabold text-white mt-2">{oaCleared}</p>
+            <p className="text-xs text-cyan-300 mt-1 font-mono">
+              {total > 0 ? ((oaCleared / total) * 100).toFixed(1) : 0}% of submissions
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-amber-50 border border-amber-100">
-            <span className="text-xs font-bold text-amber-900 uppercase">3. Interviews</span>
-            <p className="text-3xl font-extrabold text-amber-950 mt-2">{interviews}</p>
-            <p className="text-xs text-amber-700 mt-1">
+          <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20">
+            <span className="text-xs font-mono font-bold text-amber-400 uppercase">3. Interview Rate</span>
+            <p className="text-3xl font-extrabold text-white mt-2">{interviews}</p>
+            <p className="text-xs text-amber-300 mt-1 font-mono">
               {total > 0 ? ((interviews / total) * 100).toFixed(1) : 0}% interview rate
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-100">
-            <span className="text-xs font-bold text-emerald-900 uppercase">4. Offers / Selected</span>
-            <p className="text-3xl font-extrabold text-emerald-950 mt-2">{selected}</p>
-            <p className="text-xs text-emerald-700 mt-1">
+          <div className="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
+            <span className="text-xs font-mono font-bold text-emerald-400 uppercase">4. Offers / Selected</span>
+            <p className="text-3xl font-extrabold text-white mt-2">{selected}</p>
+            <p className="text-xs text-emerald-300 mt-1 font-mono">
               {total > 0 ? ((selected / total) * 100).toFixed(1) : 0}% selection rate
             </p>
           </div>
@@ -139,26 +128,26 @@ export const AnalyticsPage = () => {
       {/* Main Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Monthly Applications Momentum */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs">
+        <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Application Velocity</h3>
-              <p className="text-xs text-slate-500 mt-0.5">Month-over-month submission count</p>
+              <h3 className="text-base font-bold text-white">Application Velocity</h3>
+              <p className="text-xs text-slate-400 mt-0.5">Month-over-month submission count</p>
             </div>
-            <BarChart3 className="w-5 h-5 text-indigo-600" />
+            <BarChart3 className="w-5 h-5 text-indigo-400" />
           </div>
 
           <div className="h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={stats?.monthlyTrend || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#64748b' }} axisLine={false} tickLine={false} />
-                <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#64748b' }} axisLine={false} tickLine={false} />
+                <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
+                <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: '#0f172a',
-                    borderRadius: '12px',
+                    borderRadius: '16px',
                     color: '#ffffff',
-                    border: 'none',
+                    border: '1px solid rgba(255,255,255,0.1)',
                   }}
                 />
                 <Bar dataKey="applications" fill="#6366f1" radius={[8, 8, 0, 0]} maxBarSize={45} />
@@ -168,13 +157,13 @@ export const AnalyticsPage = () => {
         </div>
 
         {/* Application Source Distribution */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs">
+        <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="text-base font-bold text-slate-900">Application Channels</h3>
-              <p className="text-xs text-slate-500 mt-0.5">Where your applications originate</p>
+              <h3 className="text-base font-bold text-white">Channel Performance</h3>
+              <p className="text-xs text-slate-400 mt-0.5">Where your applications originate</p>
             </div>
-            <Compass className="w-5 h-5 text-purple-600" />
+            <Compass className="w-5 h-5 text-purple-400" />
           </div>
 
           <div className="h-72 w-full">
@@ -185,22 +174,22 @@ export const AnalyticsPage = () => {
                   layout="vertical"
                   margin={{ top: 10, right: 10, left: 20, bottom: 0 }}
                 >
-                  <XAxis type="number" allowDecimals={false} tick={{ fontSize: 12, fill: '#64748b' }} axisLine={false} tickLine={false} />
-                  <YAxis type="category" dataKey="source" tick={{ fontSize: 12, fill: '#64748b' }} axisLine={false} tickLine={false} width={80} />
+                  <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
+                  <YAxis type="category" dataKey="source" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} width={90} />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: '#0f172a',
-                      borderRadius: '12px',
+                      borderRadius: '16px',
                       color: '#ffffff',
-                      border: 'none',
+                      border: '1px solid rgba(255,255,255,0.1)',
                     }}
                   />
-                  <Bar dataKey="count" fill="#8b5cf6" radius={[0, 6, 6, 0]} maxBarSize={25} />
+                  <Bar dataKey="count" fill="#8b5cf6" radius={[0, 8, 8, 0]} maxBarSize={28} />
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-full flex items-center justify-center text-xs text-slate-400">
-                No source data available.
+              <div className="h-full flex items-center justify-center text-xs text-slate-500">
+                No channel data available.
               </div>
             )}
           </div>

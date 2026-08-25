@@ -1,35 +1,40 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { Briefcase, ShieldCheck, Sparkles } from 'lucide-react';
+import { Briefcase, Sparkles, ShieldCheck } from 'lucide-react';
 
 export const AuthLayout = () => {
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Decorative background gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-indigo-100/70 via-slate-50/40 to-transparent -z-10 pointer-events-none" />
-      <div className="absolute -top-24 right-10 w-96 h-96 bg-purple-200/40 rounded-full blur-3xl -z-10" />
-      <div className="absolute -bottom-24 left-10 w-96 h-96 bg-blue-200/40 rounded-full blur-3xl -z-10" />
+    <div className="min-h-screen bg-[#090d16] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden text-slate-100">
+      {/* Dynamic ambient background mesh */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-gradient-to-tr from-indigo-600/20 via-purple-600/20 to-pink-600/15 blur-3xl -z-10 rounded-full pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl -z-10 pointer-events-none" />
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link to="/" className="inline-flex items-center gap-2.5 group">
-          <div className="w-11 h-11 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+        <Link to="/" className="inline-flex items-center gap-3 group">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-xl shadow-indigo-500/25 group-hover:scale-105 transition-transform">
             <Briefcase className="w-6 h-6" />
           </div>
-          <span className="text-2xl font-extrabold tracking-tight text-slate-900">
-            Job<span className="text-indigo-600">Tracker</span>
-          </span>
+          <div className="text-left">
+            <span className="text-2xl font-extrabold tracking-tight text-white block">
+              Job<span className="text-indigo-400">Tracker</span>
+            </span>
+            <span className="text-[10px] font-mono tracking-widest text-indigo-300 font-bold block">
+              FULL-STACK MERN SAAS
+            </span>
+          </div>
         </Link>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
-        <div className="bg-white py-8 px-6 sm:px-10 shadow-xl shadow-slate-200/50 rounded-3xl border border-slate-200/80 backdrop-blur-sm">
+        <div className="glass-card py-8 px-6 sm:px-10 shadow-2xl rounded-3xl border border-slate-700/60 backdrop-blur-xl">
           <Outlet />
         </div>
 
         {/* Footer */}
-        <p className="mt-8 text-center text-xs text-slate-400">
-          &copy; {new Date().getFullYear()} JobTracker. Built for high-growth software engineers.
-        </p>
+        <div className="mt-8 flex items-center justify-center gap-2 text-xs text-slate-500">
+          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <span>HTTP-only JWT Protection &bull; Bcrypt Encrypted</span>
+        </div>
       </div>
     </div>
   );

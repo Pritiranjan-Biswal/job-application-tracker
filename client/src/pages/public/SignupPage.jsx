@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { User, Mail, Lock, Eye, EyeOff, ArrowRight, Loader2, Check } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, ArrowRight, Loader2 } from 'lucide-react';
 
 export const SignupPage = () => {
   const [name, setName] = useState('');
@@ -35,16 +35,16 @@ export const SignupPage = () => {
   return (
     <div>
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Create Account</h2>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1.5">
-          Join thousands of developers tracking their career journey
+        <h2 className="text-2xl font-extrabold text-white tracking-tight">Create Account</h2>
+        <p className="text-xs sm:text-sm text-slate-400 mt-1.5">
+          Join high-growth software engineers tracking their career
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Full Name */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
             Full Name
           </label>
           <div className="relative">
@@ -57,14 +57,14 @@ export const SignupPage = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Pritiranjan Biswal"
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 glass-input rounded-xl text-sm placeholder:text-slate-500 outline-none transition-all"
             />
           </div>
         </div>
 
         {/* Email */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
             Email Address
           </label>
           <div className="relative">
@@ -77,14 +77,14 @@ export const SignupPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="name@example.com"
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 glass-input rounded-xl text-sm placeholder:text-slate-500 outline-none transition-all"
             />
           </div>
         </div>
 
         {/* Password */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
             Password (min 6 chars)
           </label>
           <div className="relative">
@@ -98,12 +98,12 @@ export const SignupPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-colors"
+              className="w-full pl-10 pr-10 py-2.5 glass-input rounded-xl text-sm placeholder:text-slate-500 outline-none transition-all"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600"
+              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-200"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -112,7 +112,7 @@ export const SignupPage = () => {
 
         {/* Confirm Password */}
         <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-300 mb-1.5">
             Confirm Password
           </label>
           <div className="relative">
@@ -126,7 +126,7 @@ export const SignupPage = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 glass-input rounded-xl text-sm placeholder:text-slate-500 outline-none transition-all"
             />
           </div>
         </div>
@@ -134,7 +134,7 @@ export const SignupPage = () => {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 shadow-md shadow-indigo-500/20 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full mt-3 inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-600/30 transition-all disabled:opacity-60 disabled:cursor-not-allowed hover:scale-[1.02]"
         >
           {submitting ? (
             <>
@@ -143,16 +143,16 @@ export const SignupPage = () => {
             </>
           ) : (
             <>
-              Create Account
+              Create Free Account
               <ArrowRight className="w-4 h-4" />
             </>
           )}
         </button>
       </form>
 
-      <div className="mt-6 text-center text-xs text-slate-500">
+      <div className="mt-6 text-center text-xs text-slate-400">
         Already registered?{' '}
-        <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-700">
+        <Link to="/login" className="font-bold text-indigo-400 hover:text-indigo-300">
           Sign in here &rarr;
         </Link>
       </div>

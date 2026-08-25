@@ -14,21 +14,21 @@ export const Pagination = ({
   const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-2">
-      <p className="text-xs text-slate-500 font-medium">
-        Showing <span className="text-slate-900 font-semibold">{startItem}</span> to{' '}
-        <span className="text-slate-900 font-semibold">{endItem}</span> of{' '}
-        <span className="text-slate-900 font-semibold">{totalItems}</span> entries
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-3 px-2">
+      <p className="text-xs text-slate-400 font-medium">
+        Showing <span className="text-white font-bold">{startItem}</span> to{' '}
+        <span className="text-white font-bold">{endItem}</span> of{' '}
+        <span className="text-white font-bold">{totalItems}</span> entries
       </p>
 
       <div className="flex items-center gap-1.5">
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
-          className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-xs"
+          className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-slate-300 bg-slate-800/80 border border-slate-700/60 rounded-xl hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
-          Previous
+          Prev
         </button>
 
         <div className="hidden sm:flex items-center gap-1">
@@ -43,10 +43,10 @@ export const Pagination = ({
               <button
                 key={pageNum}
                 onClick={() => onPageChange(pageNum)}
-                className={`w-8 h-8 rounded-lg text-xs font-medium transition-all ${
+                className={`w-8 h-8 rounded-xl text-xs font-bold transition-all ${
                   currentPage === pageNum
-                    ? 'bg-indigo-600 text-white font-semibold shadow-xs'
-                    : 'text-slate-600 hover:bg-slate-100'
+                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
                 }`}
               >
                 {pageNum}
@@ -58,7 +58,7 @@ export const Pagination = ({
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
-          className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-xs"
+          className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-slate-300 bg-slate-800/80 border border-slate-700/60 rounded-xl hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
         >
           Next
           <ChevronRight className="w-3.5 h-3.5" />

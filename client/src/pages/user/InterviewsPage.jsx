@@ -18,13 +18,14 @@ import {
   MapPin,
   Building,
   CheckCircle2,
+  Sparkles,
 } from 'lucide-react';
 
 export const InterviewsPage = () => {
   const [interviews, setInterviews] = useState([]);
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [timeframe, setTimeframe] = useState('upcoming'); // 'upcoming' | 'past' | 'all'
+  const [timeframe, setTimeframe] = useState('upcoming');
 
   // Modals
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -106,16 +107,16 @@ export const InterviewsPage = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Interview Tracker</h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Organize multi-round technical interviews, meeting links, and preparation notes
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Interview Tracker</h1>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Schedule technical rounds, launch video links, and store prep notes
           </p>
         </div>
 
         {applications.length > 0 && (
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-indigo-500/20 transition-all hover:scale-102"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs rounded-2xl shadow-lg shadow-indigo-600/30 transition-all hover:scale-105"
           >
             <Plus className="w-4 h-4" />
             Schedule Interview
@@ -124,13 +125,13 @@ export const InterviewsPage = () => {
       </div>
 
       {/* Tabs Filter */}
-      <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
+      <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
         <button
           onClick={() => setTimeframe('upcoming')}
           className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${
             timeframe === 'upcoming'
-              ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
+              ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+              : 'text-slate-400 hover:bg-slate-800/60 hover:text-white'
           }`}
         >
           Upcoming Rounds
@@ -139,8 +140,8 @@ export const InterviewsPage = () => {
           onClick={() => setTimeframe('past')}
           className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${
             timeframe === 'past'
-              ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
+              ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+              : 'text-slate-400 hover:bg-slate-800/60 hover:text-white'
           }`}
         >
           Past / Completed
@@ -149,8 +150,8 @@ export const InterviewsPage = () => {
           onClick={() => setTimeframe('all')}
           className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${
             timeframe === 'all'
-              ? 'bg-indigo-600 text-white shadow-xs'
-              : 'text-slate-600 hover:bg-slate-100'
+              ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+              : 'text-slate-400 hover:bg-slate-800/60 hover:text-white'
           }`}
         >
           All ({interviews.length})
@@ -159,7 +160,7 @@ export const InterviewsPage = () => {
 
       {/* Content Feed */}
       {loading ? (
-        <div className="py-20 flex justify-center">
+        <div className="py-24 flex justify-center">
           <Loader size="lg" text="Loading scheduled interviews..." />
         </div>
       ) : interviews.length > 0 ? (
@@ -167,28 +168,28 @@ export const InterviewsPage = () => {
           {interviews.map((interview) => (
             <div
               key={interview._id}
-              className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+              className="glass-card rounded-3xl p-6 border border-slate-800 shadow-xl hover:border-indigo-500/40 transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <div>
-                    <h3 className="font-bold text-base text-slate-900">{interview.companyName}</h3>
-                    <p className="text-xs font-medium text-slate-600">{interview.jobTitle}</p>
+                    <h3 className="font-bold text-base text-white">{interview.companyName}</h3>
+                    <p className="text-xs font-medium text-slate-300">{interview.jobTitle}</p>
                   </div>
                   <Badge status={interview.status} />
                 </div>
 
-                <div className="p-3 bg-indigo-50/60 border border-indigo-100 rounded-2xl mb-4">
-                  <span className="text-[11px] font-bold text-indigo-900 uppercase tracking-wider block mb-1">
+                <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl mb-4">
+                  <span className="text-[10px] font-mono font-bold text-indigo-300 uppercase tracking-widest block mb-1">
                     Round Details
                   </span>
-                  <p className="text-xs font-bold text-indigo-950">{interview.round}</p>
+                  <p className="text-xs font-bold text-white">{interview.round}</p>
                 </div>
 
-                <div className="space-y-2 text-xs text-slate-600">
+                <div className="space-y-2.5 text-xs text-slate-300 font-mono">
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-indigo-500 flex-shrink-0" />
-                    <span className="font-semibold text-slate-800">
+                    <Clock className="w-4 h-4 text-indigo-400 flex-shrink-0" />
+                    <span className="font-semibold text-slate-200">
                       {new Date(interview.interviewDate).toLocaleString('en-US', {
                         weekday: 'short',
                         month: 'short',
@@ -201,52 +202,52 @@ export const InterviewsPage = () => {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <Video className="w-4 h-4 text-purple-500 flex-shrink-0" />
+                    <Video className="w-4 h-4 text-purple-400 flex-shrink-0" />
                     <span>{interview.interviewType}</span>
                   </div>
 
                   {interview.notes && (
-                    <div className="mt-3 pt-3 border-t border-slate-100">
-                      <p className="text-[11px] font-semibold text-slate-400 uppercase">Preparation Focus:</p>
-                      <p className="text-xs text-slate-600 mt-1 italic">{interview.notes}</p>
+                    <div className="mt-3 pt-3 border-t border-slate-800">
+                      <p className="text-[10px] font-mono font-bold text-slate-400 uppercase">Preparation Focus:</p>
+                      <p className="text-xs text-slate-300 mt-1 italic font-sans">"{interview.notes}"</p>
                     </div>
                   )}
 
                   {interview.feedback && (
-                    <div className="mt-2 p-2.5 bg-emerald-50 border border-emerald-100 rounded-xl">
-                      <p className="text-[11px] font-semibold text-emerald-800">Feedback / Outcome:</p>
-                      <p className="text-xs text-emerald-900 mt-0.5">{interview.feedback}</p>
+                    <div className="mt-2 p-2.5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                      <p className="text-[10px] font-mono font-bold text-emerald-400">Feedback / Outcome:</p>
+                      <p className="text-xs text-emerald-200 mt-0.5 font-sans">{interview.feedback}</p>
                     </div>
                   )}
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+              <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between gap-2">
                 {interview.meetingLink ? (
                   <a
                     href={interview.meetingLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold shadow-xs"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-600/30 transition-all"
                   >
                     <Video className="w-3.5 h-3.5" />
-                    Join Link
+                    Launch Meeting
                   </a>
                 ) : (
-                  <span className="text-xs text-slate-400">No link added</span>
+                  <span className="text-xs text-slate-500 font-mono">No link added</span>
                 )}
 
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => setEditingInterview(interview)}
-                    className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100"
+                    className="p-2 text-slate-400 hover:text-white rounded-xl hover:bg-slate-800"
                     title="Edit"
                   >
                     <Edit2 className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setDeletingId(interview._id)}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50"
+                    className="p-2 text-slate-400 hover:text-rose-400 rounded-xl hover:bg-rose-500/10"
                     title="Delete"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -260,8 +261,8 @@ export const InterviewsPage = () => {
         <EmptyState
           icon={CalendarCheck2}
           title={timeframe === 'upcoming' ? 'No upcoming interviews' : 'No interviews recorded'}
-          description="Log applications and schedule interview rounds to stay prepared."
-          actionText={applications.length > 0 ? 'Schedule an Interview' : 'Add an Application First'}
+          description="Schedule interview rounds for your applications to keep your calendar organized."
+          actionText={applications.length > 0 ? 'Schedule an Interview' : 'Add Application First'}
           onAction={() => {
             if (applications.length > 0) setIsAddModalOpen(true);
           }}
@@ -296,7 +297,7 @@ export const InterviewsPage = () => {
         onClose={() => setDeletingId(null)}
         onConfirm={handleDeleteInterview}
         title="Delete Interview Schedule"
-        message="Are you sure you want to remove this interview from your schedule?"
+        message="Are you sure you want to remove this interview round?"
       />
     </div>
   );
