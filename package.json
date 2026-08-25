@@ -1,0 +1,29 @@
+{
+  "name": "job-application-tracker",
+  "version": "1.0.0",
+  "description": "Production-quality Job Application Tracker - Full-Stack MERN Application",
+  "main": "server/server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "seed:admin": "npm run seed:admin --prefix server",
+    "seed:data": "npm run seed:data --prefix server",
+    "build": "npm run build --prefix client"
+  },
+  "keywords": [
+    "mern",
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "jwt",
+    "job-tracker"
+  ],
+  "author": "Priti",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
