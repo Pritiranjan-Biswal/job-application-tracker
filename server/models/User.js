@@ -95,8 +95,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Index for email search and sorting
-userSchema.index({ email: 1 });
+// Index for role and block status
 userSchema.index({ role: 1, isBlocked: 1 });
 
 // Pre-save hook to hash password before saving to DB
